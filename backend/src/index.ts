@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
+import mongoose from "mongoose";
 import "dotenv/config";
 
-const app = express();
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
