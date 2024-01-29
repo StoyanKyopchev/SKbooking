@@ -6,7 +6,14 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />} />
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <p>Page placeholder</p>
+              </Layout>
+            }
+          />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
