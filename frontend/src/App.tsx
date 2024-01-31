@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -11,6 +12,14 @@ function App() {
             element={
               <Layout>
                 <p>Page placeholder</p>
+              </Layout>
+            }
+          />
+          <Route
+            path="/sign-up"
+            element={
+              <Layout>
+                <SignUp />
               </Layout>
             }
           />
