@@ -1,8 +1,45 @@
 import { useState } from "react";
 
+type SignUpFormData = {
+  formData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    passwordConf: string;
+  };
+};
+
 const SignUp = () => {
+  const [state, setState] = useState<SignUpFormData>({
+    formData: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      passwordConf: "",
+    },
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      formData: {
+        ...state.formData,
+        [event.target.name]: event.target.value,
+      },
+    });
+  };
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const response = await fetch("http://localhost:5000/api/users/sign-up", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(state.formData),
+    });
   }
 
   return (
