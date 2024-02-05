@@ -22,6 +22,7 @@ const SignUp = () => {
       passwordConf: "",
     },
   });
+  const [error, setError] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -35,13 +36,29 @@ const SignUp = () => {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const response = await fetch(`${SERVER_BASE_URL}/api/users/sign-up`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(state.formData),
-    });
+    try {
+      setError("");
+
+      const response = await fetch(`${SERVER_BASE_URL}/api/users/sign-up`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(state.formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(`${data.message}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
   }
 
   return (
@@ -52,6 +69,8 @@ const SignUp = () => {
           onSubmit={handleSubmit}
           noValidate
         >
+          {error && <div>{error}</div>}
+
           <h2 className="text-3xl font-bold text-sky-700">Sign Up</h2>
           <div className="flex flex-col lg:flex-row gap-5 w-full">
             <label
