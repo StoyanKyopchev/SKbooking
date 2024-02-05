@@ -65,11 +65,15 @@ const SignUp = () => {
     <>
       <div className="flex justify-center">
         <form
-          className="flex flex-col items-center gap-3 md:gap-5 px-4 md:px-0 pb-5 2xl:pb-0 w-full lg:w-3/4 xl:w-1/2 2xl:w-1/3 group"
+          className="flex flex-col items-center gap-3 px-4 md:px-0 pb-5 2xl:pb-0 w-full lg:w-3/4 xl:w-1/2 2xl:w-1/3 group"
           onSubmit={handleSubmit}
           noValidate
         >
-          {error && <div>{error}</div>}
+          {error && (
+            <div className="rounded p-2 text-white font-bold bg-red-500 text-center">
+              {error}
+            </div>
+          )}
 
           <h2 className="text-3xl font-bold text-sky-700">Sign Up</h2>
           <div className="flex flex-col lg:flex-row gap-5 w-full">
