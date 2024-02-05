@@ -23,6 +23,7 @@ const SignUp = () => {
     },
   });
   const [error, setError] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -38,6 +39,7 @@ const SignUp = () => {
 
     try {
       setError("");
+      setSuccessMessage("");
 
       const response = await fetch(`${SERVER_BASE_URL}/api/users/sign-up`, {
         method: "POST",
@@ -52,6 +54,8 @@ const SignUp = () => {
       if (!response.ok) {
         throw new Error(`${data.message}`);
       }
+
+      setSuccessMessage(data.message);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -72,6 +76,12 @@ const SignUp = () => {
           {error && (
             <div className="rounded p-2 text-white font-bold bg-red-500 text-center">
               {error}
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="rounded p-2 text-white font-bold bg-green-500 text-center">
+              {successMessage}
             </div>
           )}
 
