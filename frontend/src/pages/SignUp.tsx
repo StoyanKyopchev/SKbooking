@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -24,6 +25,7 @@ const SignUp = () => {
   });
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -56,6 +58,9 @@ const SignUp = () => {
       }
 
       setSuccessMessage(data.message);
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
