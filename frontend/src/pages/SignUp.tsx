@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -26,6 +28,7 @@ const SignUp = () => {
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -60,6 +63,7 @@ const SignUp = () => {
 
       setSuccessMessage(data.message);
       setTimeout(() => {
+        authContext?.validateToken();
         navigate("/");
       }, 2500);
     } catch (error) {

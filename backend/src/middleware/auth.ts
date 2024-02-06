@@ -12,7 +12,7 @@ declare global {
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies["access_token"];
   if (!token) {
-    return res.status(401).json({ message: "Unathorized" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 
   try {
@@ -23,7 +23,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     req.userId = (decodedToken as JwtPayload).userId;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Unathorized" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 };
 
