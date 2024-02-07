@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
+
+const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
 type SignInFormData = {
   formData: {
@@ -16,6 +20,8 @@ const SignIn = () => {
   });
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const navigate = useNavigate();
+  const authContext = useContext(AuthContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -28,6 +34,37 @@ const SignIn = () => {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    try {
+      setError("");
+      setSuccessMessage("");
+
+      const response = await fetch(`${SERVER_BASE_URL}/api/auth/sign-in`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form.formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(`${data.message}`);
+      }
+      setSuccessMessage(data.message);
+      setTimeout(() => {
+        authContext?.validateToken();
+        navigate("/");
+      }, 2500);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
   }
 
   return (
