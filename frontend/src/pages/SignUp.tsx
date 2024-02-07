@@ -16,7 +16,7 @@ type SignUpFormData = {
 };
 
 const SignUp = () => {
-  const [state, setState] = useState<SignUpFormData>({
+  const [form, setForm] = useState<SignUpFormData>({
     formData: {
       firstName: "",
       lastName: "",
@@ -31,9 +31,9 @@ const SignUp = () => {
   const authContext = useContext(AuthContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
+    setForm({
       formData: {
-        ...state.formData,
+        ...form.formData,
         [event.target.name]: event.target.value,
       },
     });
@@ -52,7 +52,7 @@ const SignUp = () => {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(state.formData),
+        body: JSON.stringify(form.formData),
       });
 
       const data = await response.json();
@@ -106,7 +106,7 @@ const SignUp = () => {
                 className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
                 type="text"
                 name="firstName"
-                value={state.formData.firstName}
+                value={form.formData.firstName}
                 onChange={handleChange}
                 required
               />
@@ -120,7 +120,7 @@ const SignUp = () => {
                 className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
                 type="text"
                 name="lastName"
-                value={state.formData.lastName}
+                value={form.formData.lastName}
                 onChange={handleChange}
                 required
               />
@@ -132,7 +132,7 @@ const SignUp = () => {
               className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700 peer invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
               type="email"
               name="email"
-              value={state.formData.email}
+              value={form.formData.email}
               onChange={handleChange}
               placeholder=" "
               required
@@ -148,7 +148,7 @@ const SignUp = () => {
               className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700 peer invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
               type="password"
               name="password"
-              value={state.formData.password}
+              value={form.formData.password}
               onChange={handleChange}
               placeholder=" "
               required
@@ -167,12 +167,12 @@ const SignUp = () => {
               className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700 peer invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
               type="password"
               name="passwordConf"
-              value={state.formData.passwordConf}
+              value={form.formData.passwordConf}
               onChange={handleChange}
               placeholder=" "
               required
               pattern={`${
-                state.formData.password === state.formData.passwordConf
+                form.formData.password === form.formData.passwordConf
                   ? ".{6,}"
                   : ".{12345,}"
               }`}
