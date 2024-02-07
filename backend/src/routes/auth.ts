@@ -71,6 +71,7 @@ router.post("/sign-out", (req: Request, res: Response) => {
   res.cookie("access_token", "", {
     expires: new Date(0),
   });
+  res.send();
 });
 
 export default router;

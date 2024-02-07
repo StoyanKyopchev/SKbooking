@@ -1,10 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/Logo1.svg";
 
 const Header = () => {
   const authContext = useContext(AuthContext);
+  const [error, setError] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
+
+  const handleSignOut = async () => {
+    setError("");
+    setSuccessMessage("");
+
+    try {
+      await authContext?.signOut();
+      setSuccessMessage("Sign out successful.");
+      authContext?.validateToken();
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 2500);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError("Failed to sign out.");
+        setTimeout(() => {
+          setError("");
+        }, 2500);
+      } else {
+        setError("An unexpected error occurred.");
+        setTimeout(() => {
+          setError("");
+        }, 2500);
+      }
+    }
+  };
 
   return (
     <div className="bg-sky-800 py-6">
@@ -17,7 +45,7 @@ const Header = () => {
             <>
               <Link to="/my-bookings">My Bookings</Link>
               <Link to="/my-hotels">My Hotels</Link>
-              <button>Sign Out</button>
+              <button onClick={handleSignOut}>Sign Out</button>
             </>
           ) : (
             <Link
@@ -29,6 +57,16 @@ const Header = () => {
           )}
         </span>
       </div>
+      {error && (
+        <span className="fixed md:right-20 lg:right-28 xl:right-48 2xl:right-80 top-20 rounded p-2 text-white font-bold bg-red-500 text-center">
+          {error}
+        </span>
+      )}
+      {successMessage && (
+        <span className="fixed md:right-20 lg:right-28 xl:right-48 2xl:right-80 top-20 rounded p-2 text-white font-bold bg-green-500 text-center">
+          {successMessage}
+        </span>
+      )}
     </div>
   );
 };
