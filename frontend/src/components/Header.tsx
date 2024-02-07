@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <div className="bg-sky-800 py-6">
-      <div className="container flex justify-between mx-auto">
+      <div className="container max-sm:px-2.5 flex justify-between mx-auto">
         <Link to="/">
           <img src={logo} alt="Home page button" />
         </Link>
@@ -58,12 +58,12 @@ const Header = () => {
         </span>
       </div>
       {error && (
-        <span className="fixed md:right-20 lg:right-28 xl:right-48 2xl:right-80 top-20 rounded p-2 text-white font-bold bg-red-500 text-center">
+        <span className="relative md:fixed top-3 md:top-20 block md:inline mx-2.5 md:mx-0 md:right-2 lg:right-28 xl:right-48 2xl:right-80 rounded p-2 text-white font-bold bg-green-500 text-center">
           {error}
         </span>
       )}
       {successMessage && (
-        <span className="fixed md:right-20 lg:right-28 xl:right-48 2xl:right-80 top-20 rounded p-2 text-white font-bold bg-green-500 text-center">
+        <span className="relative md:fixed top-3 md:top-20 block md:inline mx-2.5 md:mx-0 md:right-2 lg:right-28 xl:right-48 2xl:right-80 rounded p-2 text-white font-bold bg-green-500 text-center">
           {successMessage}
         </span>
       )}

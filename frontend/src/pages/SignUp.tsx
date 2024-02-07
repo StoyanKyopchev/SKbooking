@@ -79,7 +79,7 @@ const SignUp = () => {
     <>
       <div className="flex justify-center">
         <form
-          className="flex flex-col items-center gap-3 px-4 md:px-0 pb-5 2xl:pb-0 w-full lg:w-3/4 xl:w-1/2 2xl:w-1/3 group"
+          className="flex flex-col items-center gap-3 pb-5 2xl:pb-0 w-full md:w-3/5 xl:w-1/2 2xl:w-1/3 group"
           onSubmit={handleSubmit}
           noValidate
         >
