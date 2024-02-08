@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
@@ -122,7 +122,10 @@ const SignIn = () => {
           </label>
           <div className="flex flex-col md:flex-row gap-3 md:gap-0 justify-between items-center w-full">
             <span>
-              <a>Don't have an account? Sign Up</a>
+              Don't have an account?{" "}
+              <Link to="/sign-up" className="text-sky-700 font-bold underline">
+                Sign Up
+              </Link>
             </span>
             <span className="w-3/4 md:w-1/3">
               <button
