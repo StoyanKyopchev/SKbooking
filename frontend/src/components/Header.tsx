@@ -37,20 +37,35 @@ const Header = () => {
   return (
     <div className="bg-sky-800 py-6">
       <div className="container max-sm:px-2.5 flex justify-between mx-auto">
-        <Link to="/">
+        <Link to="/" className="focus:outline-sky-700">
           <img src={logo} alt="Home page button" />
         </Link>
         <span className="flex space-x-2">
           {authContext?.isSignedIn ? (
             <>
-              <Link to="/my-bookings">My Bookings</Link>
-              <Link to="/my-hotels">My Hotels</Link>
-              <button onClick={handleSignOut}>Sign Out</button>
+              <Link
+                to="/my-hotels"
+                className="flex justify-center items-center bg-white text-sky-600 px-3 font-bold rounded hover:bg-gray-100 focus:outline-sky-700"
+              >
+                My Hotels
+              </Link>
+              <Link
+                to="/my-bookings"
+                className="flex justify-center items-center bg-white text-sky-600 px-3 font-bold rounded hover:bg-gray-100 focus:outline-sky-700"
+              >
+                My Bookings
+              </Link>
+              <button
+                onClick={handleSignOut}
+                className="flex justify-center items-center bg-white text-sky-600 px-3 font-bold rounded hover:bg-gray-100 focus:outline-sky-700"
+              >
+                Sign Out
+              </button>
             </>
           ) : (
             <Link
               to="/sign-in"
-              className="flex justify-center items-center bg-white text-sky-600 px-3 font-bold rounded hover:bg-gray-100"
+              className="flex justify-center items-center bg-white text-sky-600 px-3 font-bold rounded hover:bg-gray-100 focus:outline-sky-700"
             >
               Sign In
             </Link>
