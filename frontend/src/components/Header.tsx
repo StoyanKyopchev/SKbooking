@@ -35,10 +35,10 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-sky-800 py-6">
+    <div className="bg-sky-800 py-3.5 md:py-6">
       <div className="container max-sm:px-2.5 flex justify-between mx-auto">
         <Link to="/" className="focus:outline-sky-700">
-          <img src={logo} alt="Home page button" />
+          <img src={logo} alt="Home page button" className="max-sm:h-8" />
         </Link>
         <span className="flex space-x-2">
           {authContext?.isSignedIn ? (
