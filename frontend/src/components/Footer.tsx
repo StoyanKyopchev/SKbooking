@@ -9,11 +9,11 @@ import mailIcon from "../assets/images/mail.svg";
 const Footer = () => {
   return (
     <div className="bg-sky-800 py-5">
-      <div className="container max-sm:px-2.5 mx-auto flex justify-between items-center">
-        <span className="h-20 w-36 flex items-center">
+      <div className="container max-sm:px-2.5 mx-auto max-sm:gap-4 flex flex-col md:flex-row justify-between items-center">
+        <span className="md:h-20 w-36 flex items-center">
           <img src={logo} alt="Logo image" />
         </span>
-        <span className="text-white flex gap-6 tracking-tight">
+        <span className="text-white flex flex-col md:flex-row gap-3 md:gap-6 tracking-tight">
           <div>
             <h3 className="font-bold mb-1">Company</h3>
             <ul>
@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
           <div>
             <h3 className="font-bold mb-1">Socials</h3>
-            <ul>
+            <ul className="max-sm:flex max-sm:gap-4 max-sm:items-center">
               <li className="mb-1 cursor-pointer">
                 <img src={facebookIcon} alt="Link to our facebook page" />
               </li>
@@ -68,7 +68,6 @@ const Footer = () => {
           </div>
         </span>
       </div>
-      <div className="container mx-auto flex"></div>
     </div>
   );
 };
