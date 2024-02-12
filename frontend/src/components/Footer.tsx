@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
           <div>
             <h3 className="font-bold mb-1">Socials</h3>
-            <ul className="max-sm:flex max-sm:gap-4 max-sm:items-center">
+            <ul className="max-sm:flex max-sm:gap-4 max-sm:items-center md:flex md:flex-col md:items-center">
               <li className="mb-1 cursor-pointer">
                 <img src={facebookIcon} alt="Link to our facebook page" />
               </li>

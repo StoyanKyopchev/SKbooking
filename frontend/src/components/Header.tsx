@@ -7,6 +7,7 @@ const Header = () => {
   const authContext = useContext(AuthContext);
   const [error, setError] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [isToggled, setIsToggled] = useState<boolean>(false);
 
   const handleSignOut = async () => {
     setError("");
@@ -40,7 +41,7 @@ const Header = () => {
         <Link to="/" className="focus:outline-sky-700">
           <img src={logo} alt="Home page button" className="max-sm:h-8" />
         </Link>
-        <span className="flex space-x-2">
+        <span className="hidden lg:flex space-x-2">
           {authContext?.isSignedIn ? (
             <>
               <Link
@@ -70,6 +71,26 @@ const Header = () => {
               Sign In
             </Link>
           )}
+        </span>
+        <span
+          className="lg:hidden h-5 w-5 my-auto mr-3"
+          onClick={() => setIsToggled(!isToggled)}
+        >
+          <div
+            className={`bg-white w-full h-0.5 my-1 relative transition-all linear delay-2000 ${
+              isToggled ? "-rotate-45 top-[33.45%]" : ""
+            }`}
+          ></div>
+          <div
+            className={`bg-white w-full h-0.5 my-1 relative transition-all linear delay-2000 ${
+              isToggled ? "rotate-45 top-[2.5%]" : ""
+            }`}
+          ></div>
+          <div
+            className={`bg-white w-full h-0.5 my-1 relative transition-all linear delay-2000 ${
+              isToggled ? "rotate-45 -top-[25%]" : ""
+            }`}
+          ></div>
         </span>
       </div>
       {error && (
