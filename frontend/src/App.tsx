@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import ScrollToHashElement from "./components/ScrollToHashElement";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        <ScrollToHashElement />
       </BrowserRouter>
     </>
   );
