@@ -8,7 +8,7 @@ import mailIcon from "../assets/images/mail.svg";
 
 const Footer = () => {
   return (
-    <div className="bg-sky-800 py-5">
+    <div className="bg-sky-800 py-5" id="footer">
       <div className="container max-sm:px-2.5 mx-auto max-sm:gap-4 flex flex-col md:flex-row justify-between items-center">
         <span className="md:h-20 w-36 flex items-center">
           <img src={logo} alt="Logo image" />

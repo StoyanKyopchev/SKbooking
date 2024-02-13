@@ -93,6 +93,85 @@ const Header = () => {
           ></div>
         </span>
       </div>
+      <div
+        className={`lg:hidden absolute left-0 top-0 w-2/3 md:w-1/2 border-2 border-l-0 border-gray-300 rounded bg-sky-800 min-h-screen transition-opacity linear delay-2000 opacity-0 z-10 pointer-events-none ${
+          isToggled
+            ? "opacity-100 pointer-events-auto transition-opacity linear delay-2000"
+            : ""
+        }`}
+      >
+        <ul className="flex flex-col items-center gap-7 pt-4">
+          <li className="border-b-2 border-gray-300 w-full flex justify-center pb-4">
+            <Link
+              to="/"
+              className="focus:outline-sky-700"
+              onClick={() => setIsToggled(!isToggled)}
+            >
+              <img src={logo} alt="Home page button" className="max-sm:h-8" />
+            </Link>
+          </li>
+          <li className="w-1/2">
+            <Link
+              to="#footer"
+              onClick={() => setIsToggled(!isToggled)}
+              className="flex justify-center items-center h-8 bg-white text-sky-600 px-3 font-bold rounded focus:outline-sky-700"
+            >
+              About us
+            </Link>
+          </li>
+          <li className="w-1/2">
+            <Link
+              to="#footer"
+              onClick={() => setIsToggled(!isToggled)}
+              className="flex justify-center items-center h-8 bg-white text-sky-600 px-3 font-bold rounded focus:outline-sky-700"
+            >
+              Contact us
+            </Link>
+          </li>
+          {authContext?.isSignedIn ? (
+            <>
+              <li className="w-1/2">
+                <Link
+                  to="/my-hotels"
+                  onClick={() => setIsToggled(!isToggled)}
+                  className="flex justify-center items-center h-8 bg-white text-sky-600 px-3 font-bold rounded focus:outline-sky-700"
+                >
+                  My Hotels
+                </Link>
+              </li>
+              <li className="w-1/2">
+                <Link
+                  to="/my-bookings"
+                  onClick={() => setIsToggled(!isToggled)}
+                  className="flex justify-center items-center h-8 bg-white text-sky-600 px-3 font-bold rounded focus:outline-sky-700"
+                >
+                  My Bookings
+                </Link>
+              </li>
+              <li className="w-1/2">
+                <button
+                  onClick={() => {
+                    handleSignOut(), setIsToggled(!isToggled);
+                  }}
+                  className="flex justify-center items-center h-8 w-full bg-white text-sky-600 px-3 font-bold rounded focus:outline-sky-700"
+                >
+                  Sign Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <li className="w-1/2">
+              <Link
+                to="/sign-in"
+                onClick={() => setIsToggled(!isToggled)}
+                className="flex justify-center items-center h-8 bg-white text-sky-600 px-3 font-bold rounded focus:outline-sky-700"
+              >
+                Sign In
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
       {error && (
         <span className="relative md:fixed top-3 md:top-20 block md:inline mx-2.5 md:mx-0 md:right-2 lg:right-28 xl:right-48 2xl:right-80 rounded p-2 text-white font-bold bg-green-500 text-center">
           {error}
