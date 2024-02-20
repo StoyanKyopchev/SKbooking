@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DetailsSection from "./DetailsSection";
 
 export type HotelFormData = {
   formData: {
@@ -17,7 +18,13 @@ export type HotelFormData = {
 
 type FormContext = {
   form: HotelFormData;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
+  setForm: (value: React.SetStateAction<HotelFormData>) => void;
 };
 
 export const FormContext = React.createContext<FormContext | undefined>(
@@ -39,7 +46,12 @@ const ManageHotelForm = () => {
     },
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setForm({
       formData: {
         ...form.formData,
@@ -49,8 +61,12 @@ const ManageHotelForm = () => {
   };
 
   return (
-    <FormContext.Provider value={{ form: form, handleChange }}>
-      <form></form>
+    <FormContext.Provider value={{ form: form, handleChange, setForm }}>
+      <div className="flex justify-center">
+        <form className="flex flex-col items-center gap-3 pb-5 2xl:pb-0 w-full md:w-3/5 xl:w-1/2 2xl:w-1/3">
+          <DetailsSection />
+        </form>
+      </div>
     </FormContext.Provider>
   );
 };
