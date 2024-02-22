@@ -1,9 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FormContext } from "./ManageHotelForm";
 import { hotelCategories } from "../../config/hotelOptionsConfig";
 
 const CategorySection = () => {
   const formContext = useContext(FormContext);
+  const [selectedElement, setSelectedElement] = useState<undefined | number>(
+    undefined
+  );
 
   return (
     <div className="flex flex-col gap-4 w-full">
@@ -11,10 +14,20 @@ const CategorySection = () => {
       <div className="grid grid-cols-4 gap-2 mb-2">
         {hotelCategories.map((category, index) => {
           return (
-            <label key={index}>
+            <label
+              key={index}
+              htmlFor={`${index}`}
+              onClick={() => setSelectedElement(index)}
+              className={
+                selectedElement === index
+                  ? "cursor-pointer bg-sky-600 text-sm text-white text-center rounded-full py-1 font-semibold"
+                  : "cursor-pointer bg-sky-800 text-sm text-white text-center rounded-full py-1 font-semibold"
+              }
+            >
               <input
                 type="radio"
                 name="type"
+                id={`${index}`}
                 className="hidden"
                 value={category}
                 onChange={formContext?.handleChange}
