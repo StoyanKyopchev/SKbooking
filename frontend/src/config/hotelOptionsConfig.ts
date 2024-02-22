@@ -4,11 +4,11 @@ export const hotelCategories = [
   "Budget",
   "Boutique",
   "Hostel",
-  "Bunkhouses",
+  "Romantic",
   "Gastro",
   "Resort",
   "Suite",
-  "Eco",
+  "Family",
   "Heritage",
   "Business",
 ];
