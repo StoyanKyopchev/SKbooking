@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DetailsSection from "./DetailsSection";
 import CategorySection from "./CategorySection";
+import FacilitiesSection from "./FacilitiesSection";
 
 export type HotelFormData = {
   formData: {
@@ -71,6 +72,7 @@ const ManageHotelForm = () => {
         <form className="flex flex-col items-center gap-3 pb-5 2xl:pb-0 w-full md:w-3/5 xl:w-1/2 2xl:w-1/3">
           <DetailsSection />
           <CategorySection />
+          <FacilitiesSection />
         </form>
       </div>
     </FormContext.Provider>
