@@ -12,3 +12,18 @@ export const hotelCategories = [
   "Heritage",
   "Business",
 ];
+
+export const hotelFacilities = [
+  "Indoor Pool",
+  "Outdoor Pool",
+  "Fitness Center",
+  "Free Wi-Fi",
+  "Parking",
+  "Airport Shuttle",
+  "Spa",
+  "Meeting Rooms",
+  "Tennis Courts",
+  "Hotel Bar",
+  "Dining Spaces",
+  "Outdoor Patio",
+];
