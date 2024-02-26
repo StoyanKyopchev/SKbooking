@@ -11,7 +11,7 @@ const CategorySection = () => {
   return (
     <div className="flex flex-col gap-4 w-full">
       <h2 className="text-2xl font-bold text-sky-700">Category</h2>
-      <div className="grid grid-cols-4 gap-2 mb-2">
+      <div className="grid grid-cols-4 gap-2">
         {hotelCategories.map((category, index) => {
           return (
             <label
