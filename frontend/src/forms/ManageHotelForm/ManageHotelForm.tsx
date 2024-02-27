@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DetailsSection from "./DetailsSection";
 import CategorySection from "./CategorySection";
 import FacilitiesSection from "./FacilitiesSection";
+import GuestsSection from "./GuestsSection";
 
 export type HotelFormData = {
   formData: {
@@ -73,6 +74,7 @@ const ManageHotelForm = () => {
           <DetailsSection />
           <CategorySection />
           <FacilitiesSection />
+          <GuestsSection />
         </form>
       </div>
     </FormContext.Provider>
