@@ -72,7 +72,7 @@ const ManageHotelForm = () => {
   return (
     <FormContext.Provider value={{ form: form, handleChange, setForm }}>
       <div className="flex justify-center">
-        <form className="flex flex-col items-center gap-3 pb-5 2xl:pb-0 w-full md:w-3/5 xl:w-1/2 2xl:w-1/3">
+        <form className="flex flex-col items-center gap-3 pb-5 w-full md:w-3/5 xl:w-1/2 2xl:w-1/3">
           <DetailsSection />
           <CategorySection />
           <FacilitiesSection />
