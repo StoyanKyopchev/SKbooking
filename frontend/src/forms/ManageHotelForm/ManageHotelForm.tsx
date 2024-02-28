@@ -78,6 +78,14 @@ const ManageHotelForm = () => {
           <FacilitiesSection />
           <GuestsSection />
           <ImagesSection />
+          <div className="flex justify-center md:justify-end w-full max-sm:mt-3">
+            <button
+              type="submit"
+              className="bg-sky-800 w-3/4 md:w-1/3 text-white text-lg font-bold p-2 rounded hover:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-800"
+            >
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </FormContext.Provider>
