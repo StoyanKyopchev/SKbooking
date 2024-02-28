@@ -3,6 +3,7 @@ import DetailsSection from "./DetailsSection";
 import CategorySection from "./CategorySection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestsSection from "./GuestsSection";
+import ImagesSection from "./ImagesSection";
 
 export type HotelFormData = {
   formData: {
@@ -16,7 +17,7 @@ export type HotelFormData = {
     facilities: string[];
     pricePerNight: number;
     rating: number;
-    imageFiles?: FileList;
+    imageFiles: FileList | null;
     imageUrls: string[];
   };
 };
@@ -49,6 +50,7 @@ const ManageHotelForm = () => {
       facilities: [],
       pricePerNight: 0,
       rating: 0,
+      imageFiles: null,
       imageUrls: [],
     },
   });
@@ -75,6 +77,7 @@ const ManageHotelForm = () => {
           <CategorySection />
           <FacilitiesSection />
           <GuestsSection />
+          <ImagesSection />
         </form>
       </div>
     </FormContext.Provider>
