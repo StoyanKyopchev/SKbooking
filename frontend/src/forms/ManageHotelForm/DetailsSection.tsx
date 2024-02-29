@@ -79,6 +79,7 @@ const DetailsSection = () => {
                 },
               })
             }
+            step=".01"
             required
           />
         </label>

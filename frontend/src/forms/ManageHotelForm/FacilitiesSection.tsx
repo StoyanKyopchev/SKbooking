@@ -43,7 +43,6 @@ const FacilitiesSection = () => {
                     },
                   });
                 }}
-                required
               />
               <span>{facility}</span>
             </label>
