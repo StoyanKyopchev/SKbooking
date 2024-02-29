@@ -173,7 +173,7 @@ const Header = () => {
         </ul>
       </div>
       {error && (
-        <span className="relative md:fixed top-3 md:top-20 block md:inline mx-2.5 md:mx-0 md:right-2 lg:right-28 xl:right-48 2xl:right-80 rounded p-2 text-white font-bold bg-green-500 text-center">
+        <span className="relative md:fixed top-3 md:top-20 block md:inline mx-2.5 md:mx-0 md:right-2 lg:right-28 xl:right-48 2xl:right-80 rounded p-2 text-white font-bold bg-red-500 text-center">
           {error}
         </span>
       )}

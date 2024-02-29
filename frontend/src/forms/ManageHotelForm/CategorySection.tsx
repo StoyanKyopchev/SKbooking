@@ -31,7 +31,6 @@ const CategorySection = () => {
                 className="hidden"
                 value={category}
                 onChange={formContext?.handleChange}
-                required
               />
               <span>{category}</span>
             </label>

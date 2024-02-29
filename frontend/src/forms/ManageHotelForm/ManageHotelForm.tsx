@@ -56,6 +56,8 @@ const ManageHotelForm = () => {
       imageUrls: [],
     },
   });
+  const [error, setError] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
   const handleChange = (
     event:
@@ -73,6 +75,46 @@ const ManageHotelForm = () => {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (form.formData.name === "") {
+      return setError("Name is required");
+    }
+    if (form.formData.city === "") {
+      return setError("City is required");
+    }
+    if (form.formData.country === "") {
+      return setError("Country is required");
+    }
+    if (form.formData.description === "") {
+      return setError("Description is required");
+    }
+    if (
+      form.formData.pricePerNight === 0 ||
+      Number.isNaN(form.formData.pricePerNight)
+    ) {
+      return setError("Price per night is required");
+    }
+    if (form.formData.rating === 0 || Number.isNaN(form.formData.rating)) {
+      return setError("Star rating is required");
+    }
+    if (form.formData.type === "") {
+      return setError("Category is required");
+    }
+    if (form.formData.facilities.length < 1) {
+      return setError("At least 1 facility is required");
+    }
+    if (
+      form.formData.adultCount === 0 ||
+      Number.isNaN(form.formData.adultCount)
+    ) {
+      return setError("At least 1 adult is required");
+    }
+    if (
+      form.formData.imageFiles == null ||
+      form.formData.imageFiles.length < 1
+    ) {
+      return setError("At least 1 image is required");
+    }
 
     const formData = new FormData();
 
@@ -93,6 +135,9 @@ const ManageHotelForm = () => {
     });
 
     try {
+      setError("");
+      setSuccessMessage("");
+
       const response = await fetch(`${SERVER_BASE_URL}/api/my-hotels`, {
         method: "POST",
         credentials: "include",
@@ -104,9 +149,15 @@ const ManageHotelForm = () => {
       if (!response.ok) {
         throw new Error(`${data.message}`);
       }
+
+      setSuccessMessage("Hotel saved successfully");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 2500);
     } catch (error) {
       if (error instanceof Error) {
-        // Set error
+        setError(error.message);
       }
     }
   }
@@ -118,6 +169,17 @@ const ManageHotelForm = () => {
           className="flex flex-col items-center gap-3 pb-5 w-full md:w-3/5 xl:w-1/2 2xl:w-1/3"
           onSubmit={handleSubmit}
         >
+          {error && (
+            <div className="rounded p-2 text-white font-bold bg-red-500 text-center">
+              {error}
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="rounded p-2 text-white font-bold bg-green-500 text-center">
+              {successMessage}
+            </div>
+          )}
           <DetailsSection />
           <CategorySection />
           <FacilitiesSection />

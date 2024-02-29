@@ -16,7 +16,7 @@ const GuestsSection = () => {
           <input
             className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
             type="number"
-            min={1}
+            min={0}
             name="adultCount"
             id="adultCount"
             value={formContext?.form.formData.adultCount}
@@ -28,7 +28,6 @@ const GuestsSection = () => {
                 },
               })
             }
-            required
           />
         </label>
         <label
@@ -51,7 +50,6 @@ const GuestsSection = () => {
                 },
               })
             }
-            required
           />
         </label>
       </div>

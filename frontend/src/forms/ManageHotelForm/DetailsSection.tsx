@@ -15,7 +15,6 @@ const DetailsSection = () => {
           name="name"
           value={formContext?.form.formData.name}
           onChange={formContext?.handleChange}
-          required
         />
       </label>
       <div className="flex flex-col lg:flex-row gap-5 w-full">
@@ -30,7 +29,6 @@ const DetailsSection = () => {
             name="city"
             value={formContext?.form.formData.city}
             onChange={formContext?.handleChange}
-            required
           />
         </label>
         <label
@@ -44,7 +42,6 @@ const DetailsSection = () => {
             name="country"
             value={formContext?.form.formData.country}
             onChange={formContext?.handleChange}
-            required
           />
         </label>
       </div>
@@ -56,7 +53,6 @@ const DetailsSection = () => {
           value={formContext?.form.formData.description}
           onChange={formContext?.handleChange}
           rows={7}
-          required
         ></textarea>
       </label>
       <div className="flex flex-col lg:flex-row gap-5 w-full">
@@ -68,7 +64,7 @@ const DetailsSection = () => {
           <input
             className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
             type="number"
-            min={1}
+            min={0}
             name="pricePerNight"
             value={formContext?.form.formData.pricePerNight}
             onChange={(event) =>
@@ -80,7 +76,6 @@ const DetailsSection = () => {
               })
             }
             step=".01"
-            required
           />
         </label>
         <label
@@ -89,7 +84,6 @@ const DetailsSection = () => {
         >
           Star Rating
           <select
-            required
             className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
             name="rating"
             value={formContext?.form.formData.rating}
