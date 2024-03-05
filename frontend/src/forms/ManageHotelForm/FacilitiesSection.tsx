@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FormContext } from "./ManageHotelForm";
+import { FormContext } from "../../contexts/ManageHotelFormContext";
 import { hotelFacilities } from "../../config/hotelOptionsConfig";
 
 const FacilitiesSection = () => {

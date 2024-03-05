@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { FormContext } from "./ManageHotelForm";
+import { FormContext } from "../../contexts/ManageHotelFormContext";
 
 const ImagesSection = () => {
   const formContext = useContext(FormContext);
