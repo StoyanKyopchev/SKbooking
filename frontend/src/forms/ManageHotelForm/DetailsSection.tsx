@@ -13,6 +13,7 @@ const DetailsSection = () => {
           className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
           type="text"
           name="name"
+          id="name"
           value={formContext?.form.formData.name}
           onChange={formContext?.handleChange}
         />
@@ -27,6 +28,7 @@ const DetailsSection = () => {
             className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
             type="text"
             name="city"
+            id="city"
             value={formContext?.form.formData.city}
             onChange={formContext?.handleChange}
           />
@@ -40,6 +42,7 @@ const DetailsSection = () => {
             className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
             type="text"
             name="country"
+            id="country"
             value={formContext?.form.formData.country}
             onChange={formContext?.handleChange}
           />
@@ -50,6 +53,7 @@ const DetailsSection = () => {
         <textarea
           className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
           name="description"
+          id="description"
           value={formContext?.form.formData.description}
           onChange={formContext?.handleChange}
           rows={7}
@@ -64,6 +68,7 @@ const DetailsSection = () => {
           <input
             className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
             type="number"
+            id="pricePerNight"
             min={0}
             name="pricePerNight"
             value={formContext?.form.formData.pricePerNight}
@@ -86,6 +91,7 @@ const DetailsSection = () => {
           <select
             className="border w-full rounded mt-1 py-1 px-2 text-black font-normal text-base focus:outline-none focus:ring focus:ring-sky-700"
             name="rating"
+            id="rating"
             value={formContext?.form.formData.rating}
             onChange={(event) =>
               formContext?.setForm({
