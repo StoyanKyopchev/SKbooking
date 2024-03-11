@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 import { FormContext } from "../contexts/ManageHotelFormContext";
 
@@ -35,6 +35,24 @@ const AddHotel = () => {
       }
     }
   }
+
+  useEffect(() => {
+    formContext?.setForm({
+      formData: {
+        name: "",
+        city: "",
+        country: "",
+        description: "",
+        type: "",
+        adultCount: 0,
+        childCount: 0,
+        facilities: [],
+        pricePerNight: 0,
+        rating: 0,
+        imageUrls: [],
+      },
+    });
+  }, []);
 
   return <ManageHotelForm onSave={onSave} />;
 };

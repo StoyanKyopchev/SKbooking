@@ -19,6 +19,17 @@ const FacilitiesSection = () => {
     }
   };
 
+  const setCheckedAttribute = (currentFacility: string) => {
+    const hotelFacilityIndex = formContext?.form.formData.facilities.findIndex(
+      (facility) => facility === currentFacility
+    );
+    if (hotelFacilityIndex !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 w-full">
       <h2 className="text-2xl font-bold text-sky-700">Facilities</h2>
@@ -35,6 +46,7 @@ const FacilitiesSection = () => {
                 name="facilities"
                 id={`${index + 12}`}
                 value={facility}
+                checked={setCheckedAttribute(facility)}
                 onChange={(event) => {
                   formContext?.setForm({
                     formData: {

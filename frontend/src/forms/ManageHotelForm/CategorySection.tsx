@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FormContext } from "../../contexts/ManageHotelFormContext";
 import { hotelCategories } from "../../config/hotelOptionsConfig";
 
@@ -7,6 +7,13 @@ const CategorySection = () => {
   const [selectedElement, setSelectedElement] = useState<undefined | number>(
     undefined
   );
+
+  useEffect(() => {
+    const hotelCategoryIndex = hotelCategories.findIndex(
+      (category) => formContext?.form.formData.type === category
+    );
+    setSelectedElement(hotelCategoryIndex);
+  }, [formContext?.form.formData.type]);
 
   return (
     <div className="flex flex-col gap-4 w-full">

@@ -8,6 +8,7 @@ import ScrollToHashElement from "./components/ScrollToHashElement";
 import AddHotel from "./pages/AddHotel";
 import { ManageHotelFormContextProvider } from "./contexts/ManageHotelFormContext";
 import MyHotels from "./pages/MyHotels";
+import EditHotel from "./pages/EditHotel";
 
 function App() {
   const authContext = useContext(AuthContext);
@@ -57,6 +58,14 @@ function App() {
                   element={
                     <Layout>
                       <MyHotels />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/edit-hotel/:hotelId"
+                  element={
+                    <Layout>
+                      <EditHotel />
                     </Layout>
                   }
                 />

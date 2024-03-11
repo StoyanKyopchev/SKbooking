@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { HotelType } from "../../../backend/src/models/hotel";
 import { FormContext } from "../contexts/ManageHotelFormContext";
@@ -8,7 +8,6 @@ const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
 const EditHotel = () => {
   const params = useParams();
-  const [hotelData, setHotelData] = useState<HotelType>();
   const formContext = useContext(FormContext);
 
   async function fetchHotelById(hotelId: string) {
@@ -23,12 +22,27 @@ const EditHotel = () => {
         }
       );
 
-      const data = await response.json();
+      const data: HotelType = await response.json();
 
       if (!response.ok) {
         throw new Error(`An error occurred while loading the selected hotel`);
       }
-      setHotelData(data);
+
+      formContext?.setForm({
+        formData: {
+          name: data.name,
+          city: data.city,
+          country: data.country,
+          description: data.description,
+          type: data.type,
+          adultCount: data.adultCount,
+          childCount: data.childCount,
+          facilities: data.facilities,
+          pricePerNight: data.pricePerNight,
+          rating: data.rating,
+          imageUrls: [],
+        },
+      });
     } catch (error) {
       if (error instanceof Error) {
         formContext?.setError(error.message);
@@ -71,7 +85,7 @@ const EditHotel = () => {
     }
   }, [params.hotelId]);
 
-  return <ManageHotelForm onSave={onSave} hotel={hotelData} />;
+  return <ManageHotelForm onSave={onSave} />;
 };
 
 export default EditHotel;
