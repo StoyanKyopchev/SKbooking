@@ -7,6 +7,23 @@ const ImagesSection = () => {
     string | number | undefined
   >("No file chosen");
 
+  const deleteImage = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    imageUrl: string
+  ) => {
+    event.preventDefault();
+    const existingImageUrls = formContext?.form.formData.imageUrls;
+
+    formContext?.setForm({
+      formData: {
+        ...formContext?.form.formData,
+        imageUrls: existingImageUrls?.filter(
+          (url) => url !== imageUrl
+        ) as string[],
+      },
+    });
+  };
+
   return (
     <div className="flex flex-col gap-4 w-full">
       <h2 className="text-2xl font-bold text-sky-700">Images</h2>
@@ -19,7 +36,10 @@ const ImagesSection = () => {
                 key={`${index + 23}`}
               >
                 <img src={imageUrl} className="min-h-full object-cover" />
-                <button className="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 opacity-0 group-hover:opacity-100">
+                <button
+                  className="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 opacity-0 group-hover:opacity-100"
+                  onClick={(event) => deleteImage(event, imageUrl)}
+                >
                   Delete
                 </button>
               </div>
