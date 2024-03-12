@@ -40,7 +40,7 @@ const EditHotel = () => {
           facilities: data.facilities,
           pricePerNight: data.pricePerNight,
           rating: data.rating,
-          imageUrls: [],
+          imageUrls: data.imageUrls,
         },
       });
     } catch (error) {
