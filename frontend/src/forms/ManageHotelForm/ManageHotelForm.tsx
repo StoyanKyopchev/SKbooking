@@ -61,6 +61,13 @@ const ManageHotelForm = ({ onSave }: Props) => {
     ) {
       return formContext?.setError("At least 1 image is required");
     }
+    if (
+      formContext?.form.formData.imageFiles.length +
+        (formContext?.form.formData.imageUrls?.length || 0) >
+      6
+    ) {
+      return formContext?.setError("Cannot upload more than 6 images");
+    }
 
     const formData = new FormData();
 
