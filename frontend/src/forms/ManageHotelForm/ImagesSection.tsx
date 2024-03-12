@@ -10,6 +10,23 @@ const ImagesSection = () => {
   return (
     <div className="flex flex-col gap-4 w-full">
       <h2 className="text-2xl font-bold text-sky-700">Images</h2>
+      {formContext?.form.formData.imageUrls && (
+        <div className="grid grid-cols-3 gap-2">
+          {formContext?.form.formData.imageUrls.map((imageUrl, index) => {
+            return (
+              <div
+                className="relative group min-h-40 md:min-h-48 lg:min-h-56"
+                key={`${index + 23}`}
+              >
+                <img src={imageUrl} className="min-h-full object-cover" />
+                <button className="absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 opacity-0 group-hover:opacity-100">
+                  Delete
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
       <div className="flex flex-row items-center">
         <input
           type="file"
