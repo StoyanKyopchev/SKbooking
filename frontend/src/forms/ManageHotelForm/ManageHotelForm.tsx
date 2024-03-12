@@ -71,6 +71,13 @@ const ManageHotelForm = ({ onSave }: Props) => {
 
     const formData = new FormData();
 
+    if (
+      formContext.form.formData._id !== "" &&
+      formContext.form.formData._id !== undefined
+    ) {
+      formData.append("hotelId", formContext?.form.formData._id);
+    }
+
     formData.append("name", formContext?.form.formData.name);
     formData.append("city", formContext?.form.formData.city);
     formData.append("country", formContext?.form.formData.country);
@@ -92,6 +99,12 @@ const ManageHotelForm = ({ onSave }: Props) => {
       formContext?.form.formData.pricePerNight.toString()
     );
     formData.append("rating", formContext?.form.formData.rating.toString());
+
+    if (formContext.form.formData.imageUrls.length > 0) {
+      formContext.form.formData.imageUrls.forEach((imageUrl, index) => {
+        formData.append(`imageUrls[${index}]`, imageUrl);
+      });
+    }
     Array.from(formContext?.form.formData.imageFiles as FileList).forEach(
       (imageFile) => {
         formData.append("imageFiles", imageFile);

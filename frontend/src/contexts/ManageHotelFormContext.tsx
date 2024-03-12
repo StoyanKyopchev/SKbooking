@@ -6,6 +6,7 @@ type ManageHotelFormContextProps = {
 
 export type HotelFormData = {
   formData: {
+    _id?: string;
     name: string;
     city: string;
     country: string;

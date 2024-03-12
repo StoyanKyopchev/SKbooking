@@ -30,6 +30,7 @@ const EditHotel = () => {
 
       formContext?.setForm({
         formData: {
+          _id: data._id,
           name: data.name,
           city: data.city,
           country: data.country,
@@ -50,21 +51,24 @@ const EditHotel = () => {
     }
   }
 
-  async function onSave(formData: FormData) {
+  async function updateHotelById(formData: FormData) {
     try {
       formContext?.setError("");
       formContext?.setSuccessMessage("");
 
-      const response = await fetch(`${SERVER_BASE_URL}/api/my-hotels`, {
-        method: "POST",
-        credentials: "include",
-        body: formData,
-      });
+      const response = await fetch(
+        `${SERVER_BASE_URL}/api/my-hotels/${formData.get("hotelId")}`,
+        {
+          method: "PUT",
+          credentials: "include",
+          body: formData,
+        }
+      );
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(`${data.message}`);
+        throw new Error(`An error occurred while saving the changes`);
       }
 
       formContext?.setSuccessMessage("Hotel changes saved successfully");
@@ -85,7 +89,7 @@ const EditHotel = () => {
     }
   }, [params.hotelId]);
 
-  return <ManageHotelForm onSave={onSave} />;
+  return <ManageHotelForm onSave={updateHotelById} />;
 };
 
 export default EditHotel;

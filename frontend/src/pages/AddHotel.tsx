@@ -39,6 +39,7 @@ const AddHotel = () => {
   useEffect(() => {
     formContext?.setForm({
       formData: {
+        _id: "",
         name: "",
         city: "",
         country: "",
