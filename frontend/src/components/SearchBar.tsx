@@ -1,10 +1,12 @@
 import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSearchContext } from "../contexts/SearchContext";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SearchBar = () => {
   const search = useSearchContext();
+  const navigate = useNavigate();
   const [destination, setDestination] = useState<string>(search.destination);
   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
@@ -21,6 +23,7 @@ const SearchBar = () => {
       adultCount,
       childCount
     );
+    navigate("/search");
   };
 
   const minDate = new Date();

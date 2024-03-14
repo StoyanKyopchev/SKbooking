@@ -9,6 +9,7 @@ import AddHotel from "./pages/AddHotel";
 import { ManageHotelFormContextProvider } from "./contexts/ManageHotelFormContext";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
+import Search from "./pages/Search";
 
 function App() {
   const authContext = useContext(AuthContext);
