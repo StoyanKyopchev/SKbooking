@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { HotelSearchResponse } from "../../../backend/src/routes/hotels";
 import SearchResultsCard from "../components/SearchResultsCard";
+import Pagination from "../components/Pagination";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -79,6 +80,13 @@ const Search = () => {
         {hotelData?.data.map((hotel, index) => {
           return <SearchResultsCard key={index} hotel={hotel} />;
         })}
+        <div>
+          <Pagination
+            page={hotelData?.pagination.page || 1}
+            pages={hotelData?.pagination.pages || 1}
+            onPageChange={(page) => setPage(page)}
+          />
+        </div>
       </div>
     </div>
   );
