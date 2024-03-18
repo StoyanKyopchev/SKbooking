@@ -100,12 +100,10 @@ const constructSearchQuery = (queryParams: any) => {
 
   if (queryParams.stars) {
     const starRatings = Array.isArray(queryParams.stars)
-      ? queryParams.stars.map((star: string) => {
-          parseInt(star);
-        })
+      ? queryParams.stars.map((star: string) => parseInt(star))
       : parseInt(queryParams.stars);
 
-    constructedQuery.starRating = { $in: starRatings };
+    constructedQuery.rating = { $in: starRatings };
   }
 
   if (queryParams.maxPrice) {

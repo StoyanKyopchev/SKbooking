@@ -3,6 +3,7 @@ import { useSearchContext } from "../contexts/SearchContext";
 import { HotelSearchResponse } from "../../../backend/src/routes/hotels";
 import SearchResultsCard from "../components/SearchResultsCard";
 import Pagination from "../components/Pagination";
+import StarRatingFilter from "../components/StarRatingFilter";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -24,6 +25,7 @@ const Search = () => {
   const search = useSearchContext();
   const [page, setPage] = useState<number>(1);
   const [hotelData, setHotelData] = useState<HotelSearchResponse>();
+  const [selectedStars, setSelectedStars] = useState<string[]>([]);
 
   const searchParams = {
     destination: search.destination,
@@ -32,6 +34,7 @@ const Search = () => {
     adultCount: search.adultCount.toString(),
     childCount: search.childCount.toString(),
     page: page.toString(),
+    stars: selectedStars,
   };
 
   async function searchHotels(searchParams: SearchParams) {
@@ -45,15 +48,11 @@ const Search = () => {
     queryParams.append("maxPrice", searchParams.maxPrice || "");
     queryParams.append("sortOption", searchParams.sortOption || "");
 
-    searchParams.facilities?.forEach((facility) => {
-      queryParams.append("facilities", facility);
-    });
-    searchParams.types?.forEach((type) => {
-      queryParams.append("types", type);
-    });
-    searchParams.stars?.forEach((star) => {
-      queryParams.append("stars", star);
-    });
+    searchParams.facilities?.forEach((facility) =>
+      queryParams.append("facilities", facility)
+    );
+    searchParams.types?.forEach((type) => queryParams.append("types", type));
+    searchParams.stars?.forEach((star) => queryParams.append("stars", star));
 
     const response = await fetch(
       `${SERVER_BASE_URL}/api/hotels/search?${queryParams}`
@@ -67,6 +66,16 @@ const Search = () => {
     setHotelData(data);
   }
 
+  const handleStarsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const starRating = event.target.value;
+
+    setSelectedStars((prevStars) =>
+      event.target.checked
+        ? [...prevStars, starRating]
+        : prevStars.filter((star) => star !== starRating)
+    );
+  };
+
   useEffect(() => {
     searchHotels(searchParams);
   }, [
@@ -76,6 +85,7 @@ const Search = () => {
     searchParams.adultCount,
     searchParams.childCount,
     searchParams.page,
+    searchParams.stars,
   ]);
 
   return (
@@ -85,6 +95,10 @@ const Search = () => {
           <h3 className="text-lg font-semibold border-b border-sky-800 pb-5">
             Filter by:
           </h3>
+          <StarRatingFilter
+            selectedStars={selectedStars}
+            onChange={handleStarsChange}
+          />
         </div>
       </div>
       <div className="flex flex-col gap-5">
