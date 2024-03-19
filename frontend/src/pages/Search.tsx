@@ -32,6 +32,7 @@ const Search = () => {
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
+  const [sortOption, setSortOption] = useState<string>("");
 
   const searchParams = {
     destination: search.destination,
@@ -44,6 +45,7 @@ const Search = () => {
     stars: selectedStars,
     facilities: selectedFacilities,
     maxPrice: selectedPrice?.toString(),
+    sortOption,
   };
 
   async function searchHotels(searchParams: SearchParams) {
@@ -120,6 +122,7 @@ const Search = () => {
     searchParams.stars,
     searchParams.facilities,
     searchParams.maxPrice,
+    searchParams.sortOption,
   ]);
 
   return (
@@ -148,11 +151,25 @@ const Search = () => {
         </div>
       </div>
       <div className="flex flex-col gap-5">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center max-sm:flex-col max-sm:gap-3">
           <span className="text-xl font-bold">
             {hotelData?.pagination.total} Hotels found
             {search.destination ? ` in ${search.destination}` : ""}
           </span>
+          <select
+            value={sortOption}
+            onChange={(event) => setSortOption(event.target.value)}
+            className="p-2 border border-sky-800 rounded-md max-sm:w-full"
+          >
+            <option value="">Sort By</option>
+            <option value="starRating">Star Rating</option>
+            <option value="pricePerNightAsc">
+              Price Per Night (low to high)
+            </option>
+            <option value="pricePerNightDesc">
+              Price Per Night (high to low)
+            </option>
+          </select>
         </div>
         {hotelData?.data.map((hotel, index) => {
           return <SearchResultsCard key={index} hotel={hotel} />;
