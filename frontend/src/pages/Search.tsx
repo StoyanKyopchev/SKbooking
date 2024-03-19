@@ -5,6 +5,7 @@ import SearchResultsCard from "../components/SearchResultsCard";
 import Pagination from "../components/Pagination";
 import StarRatingFilter from "../components/StarRatingFilter";
 import HotelTypesFilter from "../components/HotelTypesFilter";
+import FacilitiesFilter from "../components/FacilitiesFilter";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -28,6 +29,7 @@ const Search = () => {
   const [hotelData, setHotelData] = useState<HotelSearchResponse>();
   const [selectedStars, setSelectedStars] = useState<string[]>([]);
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
+  const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
 
   const searchParams = {
     destination: search.destination,
@@ -38,6 +40,7 @@ const Search = () => {
     page: page.toString(),
     types: selectedHotelTypes,
     stars: selectedStars,
+    facilities: selectedFacilities,
   };
 
   async function searchHotels(searchParams: SearchParams) {
@@ -91,6 +94,16 @@ const Search = () => {
     );
   };
 
+  const handleFacilityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const facility = event.target.value;
+
+    setSelectedFacilities((prevFacilities) =>
+      event.target.checked
+        ? [...prevFacilities, facility]
+        : prevFacilities.filter((prevFacility) => prevFacility !== facility)
+    );
+  };
+
   useEffect(() => {
     searchHotels(searchParams);
   }, [
@@ -102,6 +115,7 @@ const Search = () => {
     searchParams.page,
     searchParams.types,
     searchParams.stars,
+    searchParams.facilities,
   ]);
 
   return (
@@ -118,6 +132,10 @@ const Search = () => {
           <HotelTypesFilter
             selectedHotelTypes={selectedHotelTypes}
             onChange={handleHotelTypeChange}
+          />
+          <FacilitiesFilter
+            selectedFacilities={selectedFacilities}
+            onChange={handleFacilityChange}
           />
         </div>
       </div>
