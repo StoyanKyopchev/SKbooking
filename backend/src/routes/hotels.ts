@@ -14,28 +14,6 @@ export type HotelSearchResponse = {
   };
 };
 
-router.get(
-  "/:id",
-  [param("id").notEmpty().withMessage("Hotel ID is required")],
-  async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const id = req.params.id.toString();
-
-    try {
-      const hotel = await Hotel.findById(id);
-      res.json(hotel);
-    } catch (error) {
-      res.status(500).json({
-        message: "An error occurred while trying to display this hotel",
-      });
-    }
-  }
-);
-
 router.get("/search", async (req: Request, res: Response) => {
   try {
     const query = constructSearchQuery(req.query);
@@ -82,6 +60,28 @@ router.get("/search", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Oops, something went wrong." });
   }
 });
+
+router.get(
+  "/:id",
+  [param("id").notEmpty().withMessage("Hotel ID is required")],
+  async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const id = req.params.id.toString();
+
+    try {
+      const hotel = await Hotel.findById(id);
+      res.json(hotel);
+    } catch (error) {
+      res.status(500).json({
+        message: "An error occurred while trying to display this hotel",
+      });
+    }
+  }
+);
 
 const constructSearchQuery = (queryParams: any) => {
   let constructedQuery: any = {};
