@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { HotelType } from "../../../backend/src/models/hotel";
+import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -76,9 +77,14 @@ const Detail = () => {
           );
         })}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-3">
         <div className="whitespace-pre-line">{hotelData.description}</div>
-        <div className="h-fit">{/*<GuestInfo />*/}</div>
+        <div className="h-fit">
+          <GuestInfoForm
+            hotelId={hotelData._id}
+            pricePerNight={hotelData.pricePerNight}
+          />
+        </div>
       </div>
     </div>
   );
