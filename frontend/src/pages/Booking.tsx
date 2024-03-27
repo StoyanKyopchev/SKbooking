@@ -5,17 +5,24 @@ const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
 const Booking = () => {
   const [currentUser, setCurrentUser] = useState<UserType>();
+  const [error, setError] = useState<string>("");
 
   async function fetchCurrentUser() {
-    const response = await fetch(`${SERVER_BASE_URL}/api/users/me`, {
-      credentials: "include",
-    });
+    try {
+      const response = await fetch(`${SERVER_BASE_URL}/api/users/me`, {
+        credentials: "include",
+      });
 
-    if (!response.ok) {
-      throw new Error("Error fetching user");
+      if (!response.ok) {
+        throw new Error("Error fetching user");
+      }
+      const data: UserType = await response.json();
+      setCurrentUser(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
     }
-    const data: UserType = await response.json();
-    setCurrentUser(data);
   }
 
   useEffect(() => {
