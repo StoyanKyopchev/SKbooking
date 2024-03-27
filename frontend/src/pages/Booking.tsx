@@ -4,6 +4,7 @@ import { UserType } from "../../../backend/src/models/user";
 import { useSearchContext } from "../contexts/SearchContext";
 import { HotelType } from "../../../backend/src/models/hotel";
 import BookingForm from "../forms/BookingForm/BookingForm";
+import BookingDetailsSummary from "../components/BookingDetailsSummary";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -70,9 +71,28 @@ const Booking = () => {
     }
   }, [search.checkIn, search.checkOut]);
 
+  if (!hotelData) {
+    return (
+      <div className="flex justify-center">
+        {error && (
+          <div className="rounded p-2 text-white font-bold bg-red-500 text-center">
+            {error}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div className="grid md:grid-cols-[1fr_2fr]">
-      <div>BOOKING DETAILS SUMMARY</div>
+    <div className="grid md:grid-cols-[1fr_2fr] gap-5 mb-5">
+      <BookingDetailsSummary
+        checkIn={search.checkIn}
+        checkOut={search.checkOut}
+        adultCount={search.adultCount}
+        childCount={search.childCount}
+        numberOfNights={numberOfNights}
+        hotel={hotelData}
+      />
       {currentUser && <BookingForm currentUser={currentUser} />}
     </div>
   );
