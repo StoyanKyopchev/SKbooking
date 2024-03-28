@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { loadStripe, Stripe } from "@stripe/stripe-js";
+
+const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || "";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -10,11 +13,14 @@ type AuthContext = {
   isSignedIn: boolean;
   validateToken: () => void;
   signOut: () => void;
+  stripePromise: Promise<Stripe | null>;
 };
 
 export const AuthContext = React.createContext<AuthContext | undefined>(
   undefined
 );
+
+const stripePromise = loadStripe(STRIPE_PUB_KEY);
 
 export const signOut = async () => {
   const response = await fetch(`${SERVER_BASE_URL}/api/auth/sign-out`, {
@@ -59,7 +65,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ isSignedIn: isSignedIn, validateToken, signOut }}
+      value={{ isSignedIn: isSignedIn, validateToken, signOut, stripePromise }}
     >
       {children}
     </AuthContext.Provider>
