@@ -68,9 +68,9 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 
       setSuccessMessage("Booking Saved");
 
-      //setTimeout(() => {
-      //  setSuccessMessage("");
-      //}, 3000);
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
