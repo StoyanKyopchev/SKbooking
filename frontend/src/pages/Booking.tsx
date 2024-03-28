@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuthContext } from "../contexts/AuthContext";
 import { UserType } from "../../../backend/src/models/user";
 import { useSearchContext } from "../contexts/SearchContext";
 import { HotelType } from "../../../backend/src/models/hotel";
 import BookingForm from "../forms/BookingForm/BookingForm";
 import BookingDetailsSummary from "../components/BookingDetailsSummary";
 import { PaymentIntentResponse } from "../../../backend/src/routes/hotels";
+import { Elements } from "@stripe/react-stripe-js";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
 const Booking = () => {
   const search = useSearchContext();
+  const { stripePromise } = useAuthContext();
   const { hotelId } = useParams();
   const [currentUser, setCurrentUser] = useState<UserType>();
   const [error, setError] = useState<string>("");
@@ -130,7 +133,17 @@ const Booking = () => {
         hotel={hotelData}
       />
       {currentUser && paymentIntentData && (
-        <BookingForm currentUser={currentUser} />
+        <Elements
+          stripe={stripePromise}
+          options={{
+            clientSecret: paymentIntentData.clientSecret,
+          }}
+        >
+          <BookingForm
+            currentUser={currentUser}
+            paymentIntent={paymentIntentData}
+          />
+        </Elements>
       )}
     </div>
   );
