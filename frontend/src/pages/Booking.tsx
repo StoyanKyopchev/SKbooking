@@ -5,6 +5,7 @@ import { useSearchContext } from "../contexts/SearchContext";
 import { HotelType } from "../../../backend/src/models/hotel";
 import BookingForm from "../forms/BookingForm/BookingForm";
 import BookingDetailsSummary from "../components/BookingDetailsSummary";
+import { PaymentIntentResponse } from "../../../backend/src/routes/hotels";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -15,6 +16,8 @@ const Booking = () => {
   const [error, setError] = useState<string>("");
   const [hotelData, setHotelData] = useState<HotelType>();
   const [numberOfNights, setNumberOfNights] = useState<number>(0);
+  const [paymentIntentData, setPaymentIntentData] =
+    useState<PaymentIntentResponse>();
 
   async function findHotelById(hotelId: string) {
     try {
@@ -52,6 +55,33 @@ const Booking = () => {
     }
   }
 
+  async function createPaymentIntent(hotelId: string, numberOfNights: string) {
+    try {
+      const response = await fetch(
+        `${SERVER_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
+        {
+          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ numberOfNights }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error fetching payment intent");
+      }
+
+      const data: PaymentIntentResponse = await response.json();
+      setPaymentIntentData(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      }
+    }
+  }
+
   useEffect(() => {
     fetchCurrentUser();
   }, []);
@@ -70,6 +100,12 @@ const Booking = () => {
       setNumberOfNights(Math.ceil(nights));
     }
   }, [search.checkIn, search.checkOut]);
+
+  useEffect(() => {
+    if (hotelId && numberOfNights > 0) {
+      createPaymentIntent(hotelId, numberOfNights.toString());
+    }
+  }, [hotelId, numberOfNights]);
 
   if (!hotelData) {
     return (
@@ -93,7 +129,9 @@ const Booking = () => {
         numberOfNights={numberOfNights}
         hotel={hotelData}
       />
-      {currentUser && <BookingForm currentUser={currentUser} />}
+      {currentUser && paymentIntentData && (
+        <BookingForm currentUser={currentUser} />
+      )}
     </div>
   );
 };
