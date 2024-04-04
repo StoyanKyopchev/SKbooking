@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { HotelType } from "../../../backend/src/models/hotel";
+import LatestDestinationCard from "../components/LatestDestinationCard";
 
 const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -44,18 +45,18 @@ const Home = () => {
   }
 
   return (
-    <div className="space-y-3">
-      <h2 className="text-3xl font-bold">Latest Destination</h2>
+    <div className="space-y-3 mb-5">
+      <h2 className="text-3xl font-bold">Latest Destinations</h2>
       <p>Most recent destinations added by our hosts</p>
       <div className="grid gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {topRowHotels.map((hotel, index) => (
-            <LatestDestinationCard hotel={hotel} />
+            <LatestDestinationCard hotel={hotel} key={index} />
           ))}
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {bottomRowHotels.map((hotel, index) => (
-            <LatestDestinationCard hotel={hotel} />
+            <LatestDestinationCard hotel={hotel} key={index} />
           ))}
         </div>
       </div>
