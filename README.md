@@ -1,4 +1,18 @@
-# Getting Started
+# SKbooking
+
+SKbooking is a user-friendly and fully responsive hotel booking app. Find great hotel deals, schedule the dates of your stay, make a secure payment and have your room booked in just a few minutes. As a hotel owner you can add or edit the details and pictures of your hotel in our database and have it listed in no time.
+
+## Built with
+
+- `MongoDB`
+- `Express.js`
+- `React`
+- `Node.js`
+- `TypeScript`
+- `Tailwind CSS`
+- `Stripe`
+
+## Getting Started
 
 This section will walk you through the process of setting up the SKbooking App on your local machine.
 
