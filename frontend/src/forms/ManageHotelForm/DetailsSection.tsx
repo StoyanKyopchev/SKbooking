@@ -1,12 +1,17 @@
 import { useContext } from "react";
+import { useLocation } from "react-router-dom";
 import { FormContext } from "../../contexts/ManageHotelFormContext";
 
 const DetailsSection = () => {
   const formContext = useContext(FormContext);
+  const location = useLocation();
+  const { pathname } = location;
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <h1 className="text-3xl font-bold text-sky-700 text-center">Add Hotel</h1>
+      <h1 className="text-3xl font-bold text-sky-700 text-center">
+        {pathname === "/add-hotel" ? "Add Hotel" : "Edit Hotel"}
+      </h1>
       <label className="text-sky-700 font-bold w-full" htmlFor="name">
         Name
         <input
