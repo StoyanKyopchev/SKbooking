@@ -1,6 +1,8 @@
-# SKbooking
+https://github.com/StoyanKyopchev/SKbooking/assets/115925638/70c32e80-6bb9-46b3-85f9-6c42b198c515
 
-SKbooking is a user-friendly and fully responsive hotel booking app. Find great hotel deals, schedule the dates of your stay, make a secure payment and have your room booked in just a few minutes. As a hotel owner you can add or edit the details and pictures of your hotel in our database and have it listed in no time.
+# SK Booking
+
+SK Booking is a user-friendly and fully responsive hotel booking app. Find great hotel deals, schedule the dates of your stay, make a secure payment and have your room booked in just a few minutes. As a hotel owner you can add or edit the details and pictures of your hotel in our database and have it listed in no time.
 
 ## Built with
 
